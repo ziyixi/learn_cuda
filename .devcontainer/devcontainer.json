@@ -1,0 +1,39 @@
+{
+    "name": "CUDA Dev (Compile Only)",
+    "build": {
+        "dockerfile": "Dockerfile",
+        // CRITICAL: Forces the image to be BUILT as x86_64
+        "options": [
+            "--platform=linux/amd64"
+        ]
+    },
+    // CRITICAL: Forces the container to RUN as x86_64
+    "runArgs": [
+        "--platform=linux/amd64"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "llvm-vs-code-extensions.vscode-clangd",
+                "nshen.cpp-tools",
+                "ms-toolsai.jupyter",
+                "google.colab",
+                "nvidia.nsight-vscode-edition",
+                "NVIDIA.nsight-copilot",
+                "GitHub.copilot",
+                "GitHub.copilot-chat"
+            ],
+            "settings": {
+                "C_Cpp.intelliSenseEngine": "disabled",
+                "clangd.path": "clangd",
+                "clangd.arguments": [
+                    "--compile-commands-dir=${workspaceFolder}",
+                    "--background-index",
+                    "--header-insertion=never"
+                ],
+                "terminal.integrated.defaultProfile.linux": "zsh"
+            }
+        }
+    },
+    "remoteUser": "root"
+}
